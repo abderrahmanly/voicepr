@@ -1,0 +1,160 @@
+{
+  "name": "Assistente Comune di Codroipo",
+  "firstMessage": "Buongiorno, sono l'assistente vocale del Comune di Codroipo. Posso aiutarla con informazioni sui servizi o con la prenotazione di un appuntamento. Come posso esserle utile?",
+  "firstMessageMode": "assistant-speaks-first",
+  "endCallMessage": "La ringrazio per aver chiamato il Comune di Codroipo. Buona giornata.",
+  "endCallPhrases": ["arrivederci", "grazie buona giornata", "è tutto grazie", "chiudo grazie"],
+  "voicemailMessage": "Salve, ho chiamato dal Comune di Codroipo. Provo a richiamarla più tardi.",
+
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-2",
+    "language": "it",
+    "smartFormat": true,
+    "endpointing": 250
+  },
+
+  "voice": {
+    "provider": "azure",
+    "voiceId": "it-IT-IsabellaNeural",
+    "speed": 1.0
+  },
+
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.3,
+    "maxTokens": 350,
+    "messages": [
+      {
+        "role": "system",
+        "content": "Sei l'assistente vocale del Comune di Codroipo. Aiuti i cittadini in due cose:\n1. INFORMAZIONI sui servizi comunali (anagrafe, carta d'identità, residenza, tributi IMU/TARI, servizi sociali, ufficio tecnico, scuola, polizia locale, stato civile).\n2. PRENOTAZIONE di appuntamenti presso gli uffici comunali.\n\nSTILE:\n- Parla SEMPRE in italiano, in modo cortese e diretto. Dai del 'lei' al cittadino.\n- Sei al telefono: frasi brevi, niente liste lunghe, niente markdown.\n- Non leggere URL, email o numeri di telefono a meno che richiesto esplicitamente.\n- Quando leggi un codice (prenotazione, codice fiscale), pronuncia ogni carattere separatamente con una breve pausa.\n\nREGOLA D'ORO — INFORMAZIONI:\n- Per QUALSIASI domanda su un servizio comunale, devi PRIMA chiamare il tool 'cerca_informazioni_servizio' e basare la risposta SOLO sui risultati restituiti.\n- Se il tool non restituisce nulla di pertinente, dillo chiaramente: 'Non ho questa informazione, posso indirizzarla all'ufficio competente.' Non inventare MAI orari, indirizzi, costi o documenti.\n- Per domande fuori scope (politica, altri comuni, traduzioni, opinioni) rispondi: 'Mi occupo solo dei servizi del Comune di Codroipo.'\n\nPRENOTAZIONE — raccogli i dati in QUESTO ORDINE:\n1. Ufficio (anagrafe, stato_civile, tributi, ufficio_tecnico, ufficio_elettorale, protocollo, servizi_sociali, polizia_locale, scuola). Se il cittadino non sa, chiedi cosa gli serve e suggerisci l'ufficio.\n2. Data e ora. Se ricevi un riferimento relativo ('martedì prossimo'), convertilo in data assoluta nel formato AAAA-MM-GGTHH:MM e CONFERMA A VOCE prima di proseguire.\n3. Nome e cognome.\n4. Codice fiscale (chiedi, ma è opzionale).\n5. Motivo della visita (opzionale).\n\nPrima di chiamare 'prenota_appuntamento', RILEGGI tutti i dati raccolti e attendi un 'sì' esplicito. Se l'orario non è disponibile, chiama 'lista_slot_disponibili' per proporre alternative. Dopo la prenotazione leggi il codice carattere per carattere e ricorda di portare un documento.\n\nVERIFICA: se il cittadino chiede di verificare un appuntamento esistente, chiedi il codice (8 caratteri) e chiama 'verifica_appuntamento'.\n\nDate/ora: oggi è la data corrente dell'ambiente; usa il fuso Europe/Rome. Gli uffici sono aperti dal lunedì al venerdì dalle 9:00 alle 17:00.\n\nSICUREZZA: non chiedere mai password, dati bancari, numeri di carta. Per emergenze indica il 112. Se non capisci o c'è silenzio, chiedi: 'Mi scusi, non l'ho sentita. Può ripetere?'"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "cerca_informazioni_servizio",
+          "description": "Cerca informazioni nei documenti ufficiali dei servizi del Comune di Codroipo. Da chiamare PRIMA di rispondere a qualsiasi domanda su un servizio (orari, documenti, costi, contatti). Esempi di query: 'come rinnovare carta identità', 'orari anagrafe', 'pagamento TARI'.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "La domanda riformulata in italiano in modo conciso (es. 'documenti necessari per cambio residenza')."
+              },
+              "top_k": {
+                "type": "integer",
+                "description": "Numero di risultati. Default 4.",
+                "default": 4
+              }
+            },
+            "required": ["query"]
+          }
+        },
+        "server": {
+          "url": "REPLACE_WITH_NGROK_URL/vapi/webhook"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lista_slot_disponibili",
+          "description": "Elenca gli slot orari disponibili presso un ufficio in una data specifica. Da usare quando il cittadino chiede gli orari liberi o quando lo slot richiesto è occupato e serve proporre alternative.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "office": {
+                "type": "string",
+                "description": "Identificativo ufficio: anagrafe, stato_civile, tributi, ufficio_tecnico, ufficio_elettorale, protocollo, servizi_sociali, polizia_locale, scuola."
+              },
+              "date": {
+                "type": "string",
+                "description": "Data in formato ISO AAAA-MM-GG (es. 2026-06-03)."
+              }
+            },
+            "required": ["office", "date"]
+          }
+        },
+        "server": {
+          "url": "REPLACE_WITH_NGROK_URL/vapi/webhook"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "prenota_appuntamento",
+          "description": "Crea una nuova prenotazione. Da chiamare SOLO dopo aver raccolto tutti i dati obbligatori e ricevuto conferma esplicita del cittadino sui dati riepilogati.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "citizen_name": {
+                "type": "string",
+                "description": "Nome e cognome del cittadino."
+              },
+              "office": {
+                "type": "string",
+                "description": "Identificativo ufficio: anagrafe, stato_civile, tributi, ufficio_tecnico, ufficio_elettorale, protocollo, servizi_sociali, polizia_locale, scuola."
+              },
+              "scheduled_at": {
+                "type": "string",
+                "description": "Data e ora in formato ISO 8601 con timezone, es. 2026-06-03T10:30:00+02:00."
+              },
+              "fiscal_code": {
+                "type": "string",
+                "description": "Codice fiscale (16 caratteri). Opzionale."
+              },
+              "phone": {
+                "type": "string",
+                "description": "Numero di telefono. Opzionale."
+              },
+              "reason": {
+                "type": "string",
+                "description": "Motivo della visita in poche parole. Opzionale."
+              }
+            },
+            "required": ["citizen_name", "office", "scheduled_at"]
+          }
+        },
+        "server": {
+          "url": "REPLACE_WITH_NGROK_URL/vapi/webhook"
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "verifica_appuntamento",
+          "description": "Verifica una prenotazione esistente tramite il codice di 8 caratteri. Da chiamare quando il cittadino chiede informazioni su un appuntamento già preso.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Codice di prenotazione di 8 caratteri alfanumerici."
+              }
+            },
+            "required": ["code"]
+          }
+        },
+        "server": {
+          "url": "REPLACE_WITH_NGROK_URL/vapi/webhook"
+        }
+      }
+    ]
+  },
+
+  "server": {
+    "url": "REPLACE_WITH_NGROK_URL/vapi/webhook",
+    "headers": {
+      "X-Vapi-Secret": "REPLACE_WITH_YOUR_VAPI_WEBHOOK_SECRET"
+    }
+  },
+
+  "serverMessages": ["tool-calls", "end-of-call-report"],
+
+  "silenceTimeoutSeconds": 30,
+  "maxDurationSeconds": 600,
+  "backgroundSound": "office",
+  "responseDelaySeconds": 0.3
+}

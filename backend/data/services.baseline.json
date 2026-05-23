@@ -1,0 +1,100 @@
+[
+  {
+    "id": "anagrafe-overview",
+    "title": "Ufficio Anagrafe — Informazioni generali",
+    "url": "https://www.comune.codroipo.ud.it/it/anagrafe-239156",
+    "office": "anagrafe",
+    "content": "L'Ufficio Anagrafe del Comune di Codroipo si trova in Piazza Garibaldi 81, primo piano. Si occupa di tenuta dei registri della popolazione residente, certificati anagrafici, cambi di residenza, attestazioni di soggiorno per cittadini comunitari e rilascio della carta d'identità elettronica (CIE). Orari di apertura al pubblico: lunedì, mercoledì e venerdì dalle 8:30 alle 12:30; martedì e giovedì dalle 8:30 alle 12:30 e dalle 15:00 alle 17:00. Telefono: 0432 824631. Email: anagrafe@comune.codroipo.ud.it. Molti certificati sono ottenibili gratuitamente online tramite il portale ANPR con SPID o CIE."
+  },
+  {
+    "id": "carta-identita-elettronica",
+    "title": "Carta d'Identità Elettronica (CIE)",
+    "url": "https://www.comune.codroipo.ud.it/it/carta-d-identita-elettronica",
+    "office": "anagrafe",
+    "content": "La Carta d'Identità Elettronica (CIE) si richiede su appuntamento presso l'Ufficio Anagrafe. Documenti necessari: la vecchia carta d'identità o un altro documento di riconoscimento valido, una fototessera recente in formato cartaceo o digitale (sfondo bianco), il codice fiscale o tessera sanitaria. Il costo è di 22,21 euro da pagare in contanti o con POS al momento del rilascio. La CIE non viene consegnata subito: arriva all'indirizzo indicato dal cittadino entro circa 6 giorni lavorativi dalla richiesta. Per i minori serve la presenza di entrambi i genitori o l'assenso scritto del genitore assente. La carta è valida 10 anni per i maggiorenni, 5 anni per i minori dai 3 ai 18 anni, 3 anni per i bambini sotto i 3 anni."
+  },
+  {
+    "id": "certificati-anagrafici",
+    "title": "Certificati anagrafici",
+    "url": "https://www.comune.codroipo.ud.it/it/certificati-anagrafici",
+    "office": "anagrafe",
+    "content": "I certificati di residenza, stato di famiglia, cittadinanza, esistenza in vita e altri certificati anagrafici sono richiedibili gratuitamente online tramite il portale ANPR (Anagrafe Nazionale della Popolazione Residente) con SPID, CIE o CNS. In sportello il rilascio è in carta libera (gratuito) o in bollo (16 euro) a seconda dell'uso. Per certificati storici (dati riferiti a date passate) è necessaria richiesta scritta e i tempi di rilascio sono fino a 30 giorni. Dal 2012 i certificati anagrafici non sono più richiedibili dalle pubbliche amministrazioni: si usa l'autocertificazione."
+  },
+  {
+    "id": "cambio-residenza",
+    "title": "Cambio di residenza",
+    "url": "https://www.comune.codroipo.ud.it/it/cambio-residenza",
+    "office": "anagrafe",
+    "content": "Il cambio di residenza si richiede entro 20 giorni dal trasferimento. Si può presentare la dichiarazione online tramite ANPR con SPID/CIE oppure di persona in Anagrafe con il modulo ministeriale firmato da tutti i maggiorenni del nuovo nucleo. Documenti richiesti: documento d'identità, codice fiscale, dati del proprietario o titolare del contratto di affitto dell'abitazione (per la verifica del titolo di occupazione legittima ai sensi dell'art. 5 del DL 47/2014). La registrazione è immediata, ma la Polizia Locale effettua un controllo entro 45 giorni per verificare la dimora abituale. Per chi proviene dall'estero (AIRE) sono richiesti documenti aggiuntivi."
+  },
+  {
+    "id": "stato-civile-overview",
+    "title": "Ufficio Stato Civile",
+    "url": "https://www.comune.codroipo.ud.it/it/stato-civile-239153",
+    "office": "stato_civile",
+    "content": "L'Ufficio Stato Civile si occupa di atti di nascita, matrimonio, unione civile, divorzio e morte. Si trova in Piazza Garibaldi 81. Orari: lunedì, mercoledì, venerdì 8:30-12:30; martedì e giovedì 8:30-12:30 e 15:00-17:00. Per matrimoni civili e unioni civili è necessario fissare un appuntamento per le pubblicazioni almeno 60 giorni prima della cerimonia. Telefono: 0432 824632. Email: statocivile@comune.codroipo.ud.it."
+  },
+  {
+    "id": "tributi-imu",
+    "title": "IMU — Imposta Municipale Unica",
+    "url": "https://www.comune.codroipo.ud.it/it/imu",
+    "office": "tributi",
+    "content": "L'IMU è dovuta dai proprietari di immobili non adibiti ad abitazione principale (esclusi gli immobili di lusso categorie A/1, A/8, A/9). Le scadenze sono due: acconto entro il 16 giugno e saldo entro il 16 dicembre. Il pagamento si effettua tramite modello F24 indicando il codice catastale del Comune di Codroipo (C817). Le aliquote per l'anno in corso sono pubblicate sul sito del Comune. Per il calcolo è possibile utilizzare il portale online o rivolgersi all'Ufficio Tributi. Sono previste agevolazioni per anziani ricoverati e per immobili dati in comodato a parenti in linea retta."
+  },
+  {
+    "id": "tributi-tari",
+    "title": "TARI — Tassa sui rifiuti",
+    "url": "https://www.comune.codroipo.ud.it/it/tari",
+    "office": "tributi",
+    "content": "La TARI è la tassa sulla raccolta e smaltimento dei rifiuti urbani. Si paga ogni anno in tre rate (di norma giugno, settembre, dicembre) tramite avviso che il Comune invia al domicilio. La tariffa dipende dalla superficie dell'immobile e dal numero di occupanti. In caso di nuova residenza, variazione del numero degli occupanti o cambio di intestatario è obbligatorio presentare una dichiarazione TARI entro 90 giorni. Per agevolazioni economiche (ISEE, famiglie numerose, compostaggio domestico) consultare il regolamento. Ufficio Tributi: telefono 0432 824620, email tributi@comune.codroipo.ud.it."
+  },
+  {
+    "id": "ufficio-elettorale",
+    "title": "Ufficio Elettorale — Tessera elettorale",
+    "url": "https://www.comune.codroipo.ud.it/it/ufficio-elettorale-242847",
+    "office": "ufficio_elettorale",
+    "content": "L'Ufficio Elettorale gestisce le liste elettorali, il rilascio e duplicato della tessera elettorale, le iscrizioni all'albo dei presidenti e degli scrutatori di seggio. La tessera elettorale viene consegnata a domicilio al raggiungimento della maggiore età. In caso di smarrimento, deterioramento o esaurimento degli spazi per i timbri, si può richiedere il duplicato in sportello presentando un documento d'identità: il rilascio è immediato e gratuito. Nei giorni delle elezioni l'ufficio è aperto con orario prolungato. Telefono: 0432 824633."
+  },
+  {
+    "id": "ufficio-tecnico-edilizia",
+    "title": "Ufficio Tecnico — Pratiche edilizie",
+    "url": "https://www.comune.codroipo.ud.it/it/edilizia-privata",
+    "office": "ufficio_tecnico",
+    "content": "L'Ufficio Tecnico riceve e istruisce le pratiche edilizie: Comunicazione di Inizio Lavori Asseverata (CILA), Segnalazione Certificata di Inizio Attività (SCIA), Permesso di Costruire, certificati di destinazione urbanistica. Le pratiche edilizie si presentano esclusivamente in modalità telematica tramite il portale SUAP regionale o il portale Edilizia del Comune, firmate digitalmente da tecnico abilitato. I tempi di rilascio variano: 30 giorni per la SCIA, 60-90 giorni per il Permesso di Costruire. Ricevimento al pubblico solo su appuntamento: martedì e giovedì 9:00-12:00. Telefono: 0432 824650."
+  },
+  {
+    "id": "servizi-sociali",
+    "title": "Servizi Sociali — Sostegni e contributi",
+    "url": "https://www.comune.codroipo.ud.it/it/servizi-sociali",
+    "office": "servizi_sociali",
+    "content": "I Servizi Sociali del Comune offrono sostegno alle famiglie, anziani, persone con disabilità e minori. I principali interventi includono: assegno di maternità e per il nucleo familiare numeroso, contributi per affitto (Misura Attiva di Sostegno al Reddito), assistenza domiciliare anziani, trasporto sociale, accesso a servizi residenziali e semiresidenziali. Per accedere è necessaria una valutazione dell'assistente sociale tramite appuntamento. Orari di ricevimento: martedì e giovedì 9:00-12:00 su appuntamento. Telefono: 0432 824640. Email: servizisociali@comune.codroipo.ud.it."
+  },
+  {
+    "id": "polizia-locale",
+    "title": "Polizia Locale",
+    "url": "https://www.comune.codroipo.ud.it/it/polizia-locale",
+    "office": "polizia_locale",
+    "content": "La Polizia Locale di Codroipo si occupa di sicurezza urbana, viabilità, controllo del commercio, accertamenti anagrafici, gestione contravvenzioni stradali e oggetti smarriti. Sede: Via Friuli 12. Per il pagamento di una contravvenzione si può utilizzare il bollettino postale allegato, il bonifico bancario indicato sul verbale o il PagoPA. Per fare ricorso ci sono 60 giorni dal Prefetto o 30 giorni al Giudice di Pace. Numero centrale operativa: 0432 824700. Email: polizialocale@comune.codroipo.ud.it. In caso di emergenza chiamare il 112."
+  },
+  {
+    "id": "scuola-mensa",
+    "title": "Servizio mensa scolastica e trasporto",
+    "url": "https://www.comune.codroipo.ud.it/it/servizi-scolastici",
+    "office": "scuola",
+    "content": "Il Comune di Codroipo gestisce la mensa scolastica e il trasporto scolastico per la scuola dell'infanzia, primaria e secondaria di primo grado. L'iscrizione si effettua online ogni anno tra maggio e giugno tramite il portale dei servizi scolastici. Il pagamento dei buoni mensa avviene tramite ricarica online del borsellino elettronico, con causale del codice studente. Sono previste tariffe agevolate in base all'ISEE: presentare l'attestazione entro il 30 settembre. Per diete speciali (allergie, intolleranze, motivi religiosi) è richiesto certificato medico o dichiarazione. Ufficio Istruzione: 0432 824660."
+  },
+  {
+    "id": "protocollo",
+    "title": "Ufficio Protocollo",
+    "url": "https://www.comune.codroipo.ud.it/it/protocollo",
+    "office": "protocollo",
+    "content": "L'Ufficio Protocollo riceve istanze, comunicazioni e documenti destinati all'amministrazione comunale. Si trova al piano terra del Municipio, Piazza Garibaldi 81. Orari: dal lunedì al venerdì 8:30-12:30; martedì e giovedì anche 15:00-17:00. È possibile presentare istanze tramite PEC all'indirizzo comune.codroipo@certgov.fvg.it (modalità preferita), o consegnandole a mano in ufficio. Le istanze tramite email ordinaria non sono valide ai fini del protocollo. Telefono: 0432 824600."
+  },
+  {
+    "id": "suap-attivita-produttive",
+    "title": "SUAP — Sportello Unico per le Attività Produttive",
+    "url": "https://www.comune.codroipo.ud.it/it/suap",
+    "office": "ufficio_tecnico",
+    "content": "Il SUAP è il punto unico di accesso per le imprese che vogliono avviare, modificare, trasferire o cessare un'attività economica. Tutte le pratiche (apertura esercizio commerciale, somministrazione di alimenti e bevande, attività artigianali, eventi temporanei) si presentano esclusivamente online tramite il portale SUAP della Regione Friuli Venezia Giulia, con firma digitale e PEC. Per assistenza tecnica sulla compilazione il Comune offre supporto su appuntamento il martedì mattina. Telefono: 0432 824655. Email: suap@comune.codroipo.ud.it."
+  }
+]

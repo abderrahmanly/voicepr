@@ -1,0 +1,58 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: voicepr-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-voicepr}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-voicepr}
+      POSTGRES_DB: ${POSTGRES_DB:-voicepr}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-voicepr}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: voicepr-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-voicepr}:${POSTGRES_PASSWORD:-voicepr}@db:5432/${POSTGRES_DB:-voicepr}
+      VAPI_WEBHOOK_SECRET: ${VAPI_WEBHOOK_SECRET:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-paraphrase-multilingual-MiniLM-L12-v2}
+      CHROMA_DIR: /app/data/chroma
+      SERVICES_FILE: /app/data/services.json
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:8080}
+    volumes:
+      - ./backend/data:/app/data
+      - hf_cache:/root/.cache/huggingface
+    ports:
+      - "8000:8000"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: voicepr-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    environment:
+      VITE_API_BASE: ${VITE_API_BASE:-http://localhost:8000}
+
+volumes:
+  pgdata:
+  hf_cache:

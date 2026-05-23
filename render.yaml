@@ -1,0 +1,38 @@
+# Render Blueprint — deploys the backend as a Docker web service.
+# https://render.com/docs/blueprint-spec
+#
+# After pushing this repo to GitHub:
+#   1. Go to https://dashboard.render.com → Blueprints → New Blueprint Instance
+#   2. Pick this repo. Render reads render.yaml and creates the service.
+#   3. Set VAPI_WEBHOOK_SECRET to a strong random string in the env tab.
+#   4. After first deploy completes, copy the public URL and PATCH the Vapi
+#      assistant's server.url + every tool.server.url to <render-url>/vapi/webhook
+#
+# Free plan caveats:
+#   - 512 MB RAM, 0.1 CPU — tight for ML; if you hit OOM, bump to "starter".
+#   - Sleeps after 15 min idle; cold start is ~30 s.
+#   - No persistent disk on free; the SQLite DB is recreated on every boot.
+#     (Acceptable for the demo. For real use, attach Render Postgres.)
+
+services:
+  - type: web
+    name: voicepr-backend
+    runtime: docker
+    plan: free
+    region: frankfurt          # closer to Italian users / Vapi EU egress
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./voicepr.db
+      - key: EMBEDDING_MODEL
+        value: paraphrase-multilingual-MiniLM-L12-v2
+      - key: CHROMA_DIR
+        value: ./data/chroma
+      - key: SERVICES_FILE
+        value: ./data/services.json
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: VAPI_WEBHOOK_SECRET
+        sync: false             # set this manually in the dashboard
