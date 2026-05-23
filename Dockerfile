@@ -13,8 +13,13 @@ RUN npm ci --no-audit --no-fund
 COPY frontend/ .
 # Build with /dashboard/ as the base so assets resolve correctly, and
 # empty VITE_API_BASE so fetches go to the same origin.
+# Vapi credentials below are PUBLIC by design (the assistant ID is just
+# an identifier, the public key is the client-side counterpart to the
+# server-side private key) — safe to commit and ship to browsers.
 ENV VITE_BASE_PATH=/dashboard/ \
-    VITE_API_BASE=
+    VITE_API_BASE= \
+    VITE_VAPI_PUBLIC_KEY=e4313478-0071-4603-ab27-57990488fba5 \
+    VITE_VAPI_ASSISTANT_ID=285517dc-4fe6-483c-b775-3439df7eccbe
 RUN npm run build
 
 # ─── Stage 2: backend image with bundled frontend ───────────────────────
