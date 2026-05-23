@@ -3,8 +3,9 @@ from contextlib import asynccontextmanager
 
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api import appointments, calls, rag, vapi
@@ -60,10 +61,26 @@ if _audio_dir.exists():
 _dashboard_dir = Path("/app/static/dashboard")
 if _dashboard_dir.exists():
     app.mount(
-        "/dashboard",
-        StaticFiles(directory=str(_dashboard_dir), html=True),
-        name="dashboard",
+        "/dashboard/assets",
+        StaticFiles(directory=str(_dashboard_dir / "assets")),
+        name="dashboard-assets",
     )
+
+    @app.get("/dashboard/{path:path}")
+    def _spa_fallback(path: str):
+        """Serve the SPA index.html for any unmatched /dashboard/* path
+        so React Router can handle deep links like /dashboard/calls."""
+        candidate = _dashboard_dir / path
+        if path and candidate.is_file():
+            return FileResponse(candidate)
+        index = _dashboard_dir / "index.html"
+        if not index.exists():
+            raise HTTPException(status_code=404)
+        return FileResponse(index)
+
+    @app.get("/dashboard")
+    def _spa_root():
+        return FileResponse(_dashboard_dir / "index.html")
 
 
 @app.get("/health")
