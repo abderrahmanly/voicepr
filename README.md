@@ -10,11 +10,17 @@ pinned: false
 
 # Voicepr — Voicebot per i servizi del Comune di Codroipo
 
-> **Demo live**
-> Backend deployato come Docker Space su Hugging Face:
-> 🔗 [`https://abdouly-voicepr.hf.space`](https://abdouly-voicepr.hf.space)
-> Health: <https://abdouly-voicepr.hf.space/health> · Swagger: <https://abdouly-voicepr.hf.space/docs>
-> Un assistente Vapi precaricato punta a questo backend; per parlare con il bot in italiano basta aprire l'assistente in Vapi dashboard e cliccare *Talk to Assistant*. Vedi `vapi/README.md` per importarne una copia nel proprio account.
+> **Demo live (Hugging Face Spaces, Docker SDK)**
+>
+> | | |
+> |---|---|
+> | 🎛 Pannello (appuntamenti + chiamate) | https://abdouly-voicepr.hf.space/dashboard |
+> | 📚 API docs (Swagger) | https://abdouly-voicepr.hf.space/docs |
+> | ❤ Health | https://abdouly-voicepr.hf.space/health |
+>
+> Un assistente Vapi (`gpt-4o` + Deepgram IT + Azure `IsabellaNeural`) è già configurato e punta a questo backend. Per parlare col bot: aprire l'assistente in Vapi dashboard e cliccare *Talk to Assistant*. Le istruzioni per importarne una copia nel proprio account Vapi sono in [`vapi/README.md`](vapi/README.md).
+>
+> _Nota: Hugging Face mette lo Space in sleep dopo 48 h di inattività. La prima chiamata dopo il sleep impiega ~30 s per il warm-up._
 
 Prototipo di assistente vocale in italiano che:
 
