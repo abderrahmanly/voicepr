@@ -1,3 +1,13 @@
+---
+title: Voicepr — Comune di Codroipo
+emoji: 🏛️
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # Voicepr — Voicebot per i servizi del Comune di Codroipo
 
 Prototipo di assistente vocale in italiano che:
