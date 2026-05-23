@@ -1,7 +1,23 @@
 # Root Dockerfile for Hugging Face Spaces (Docker SDK).
-# HF Spaces require the Dockerfile at the repo root; this builds only
-# the backend tree. Local docker-compose still uses backend/Dockerfile.
+# Multi-stage: builds the React frontend, then ships it alongside the
+# FastAPI backend in a single image. Frontend is served from /dashboard.
+#
+# Local docker-compose still uses backend/Dockerfile and frontend/Dockerfile
+# as separate services.
 
+# ─── Stage 1: build the frontend ────────────────────────────────────────
+FROM node:20-alpine AS frontend-build
+WORKDIR /fe
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ .
+# Build with /dashboard/ as the base so assets resolve correctly, and
+# empty VITE_API_BASE so fetches go to the same origin.
+ENV VITE_BASE_PATH=/dashboard/ \
+    VITE_API_BASE=
+RUN npm run build
+
+# ─── Stage 2: backend image with bundled frontend ───────────────────────
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -19,6 +35,9 @@ COPY backend/requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY backend/ .
+
+# Drop the built SPA where FastAPI's main.py expects it.
+COPY --from=frontend-build /fe/dist /app/static/dashboard
 
 # HF Spaces requires the writable path /data; mount HF cache + sqlite there.
 RUN mkdir -p /data

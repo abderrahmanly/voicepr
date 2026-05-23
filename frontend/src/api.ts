@@ -1,5 +1,7 @@
-export const API_BASE =
-  (import.meta.env.VITE_API_BASE as string | undefined) ?? "http://localhost:8000";
+// Empty string = same origin (used in the bundled HF Space deployment).
+// Dev fallback: http://localhost:8000 when serving via `npm run dev`.
+const envBase = import.meta.env.VITE_API_BASE as string | undefined;
+export const API_BASE = envBase !== undefined ? envBase : "http://localhost:8000";
 
 export type Appointment = {
   code: string;

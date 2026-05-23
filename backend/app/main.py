@@ -55,6 +55,16 @@ _audio_dir = Path(__file__).resolve().parent.parent / "data" / "audio"
 if _audio_dir.exists():
     app.mount("/audio", StaticFiles(directory=str(_audio_dir)), name="audio")
 
+# Bundled frontend (built by the root Dockerfile in multi-stage mode).
+# Only present in the HF Space image; absent for plain `uvicorn` dev.
+_dashboard_dir = Path("/app/static/dashboard")
+if _dashboard_dir.exists():
+    app.mount(
+        "/dashboard",
+        StaticFiles(directory=str(_dashboard_dir), html=True),
+        name="dashboard",
+    )
+
 
 @app.get("/health")
 def health() -> dict:
