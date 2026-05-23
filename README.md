@@ -10,6 +10,12 @@ pinned: false
 
 # Voicepr — Voicebot per i servizi del Comune di Codroipo
 
+> **Demo live**
+> Backend deployato come Docker Space su Hugging Face:
+> 🔗 [`https://abdouly-voicepr.hf.space`](https://abdouly-voicepr.hf.space)
+> Health: <https://abdouly-voicepr.hf.space/health> · Swagger: <https://abdouly-voicepr.hf.space/docs>
+> Un assistente Vapi precaricato punta a questo backend; per parlare con il bot in italiano basta aprire l'assistente in Vapi dashboard e cliccare *Talk to Assistant*. Vedi `vapi/README.md` per importarne una copia nel proprio account.
+
 Prototipo di assistente vocale in italiano che:
 
 1. Risponde alle domande dei cittadini sui servizi del Comune di Codroipo (RAG su contenuti del sito).
@@ -38,7 +44,21 @@ Il voicebot gira su [Vapi](https://vapi.ai) e chiama i tool di un backend FastAP
 | Frontend | React + Vite + TypeScript | Minimal, type-safe |
 | Infra | Docker Compose | Tre servizi: `db`, `backend`, `frontend` |
 
-## Setup rapido (Docker)
+## Deploy sul cloud (Hugging Face Spaces)
+
+Il backend è interamente Docker-based; il `Dockerfile` alla radice e il frontmatter di questo `README.md` (`sdk: docker, app_port: 7860`) sono compatibili con HF Spaces. Per replicare il deploy:
+
+1. Crea uno Space `Docker` su <https://huggingface.co/new-space>.
+2. Aggiungi il remote HF e fai push del repo: `git push hf main`.
+3. Nella sezione *Settings → Variables and secrets* dello Space imposta:
+   - secret `VAPI_WEBHOOK_SECRET` (stringa casuale)
+   - variable `CORS_ORIGINS` = `*` (o restringi al tuo frontend)
+   - variable `DATABASE_URL` = `sqlite:////data/voicepr.db` (la cartella `/data` è persistente su HF)
+4. Dopo il primo build (~3-5 min con torch + sentence-transformers), aggiorna l'URL dei tool e del webhook dell'assistente Vapi in `<your-space-url>/vapi/webhook`.
+
+HF gira la nostra immagine su CPU basic con 16 GB RAM gratuiti — più che sufficiente per il modello multilingue.
+
+## Setup rapido (Docker locale)
 
 Requisiti: Docker + Docker Compose. Per la prova vocale serve anche `ngrok`.
 
