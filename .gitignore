@@ -27,6 +27,9 @@ backend/*.db-journal
 # Local IDE / tool state
 .claude/
 
+# Personal drafts (not part of the deliverable)
+email-draft.md
+
 # Editor
 .idea/
 .vscode/
